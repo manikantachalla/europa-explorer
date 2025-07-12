@@ -7,7 +7,7 @@ const VALID_INSTRUCTIONS = new Set(['L', 'R', 'M']);
 
 // ── 1. Get file path from CLI args
 const args = process.argv.slice(2);
-const inputFileArg = args.find(arg => arg.startsWith('--inputFile='));
+const inputFileArg = args.find(arg => arg.startsWith('inputFile='));
 const inputPath = inputFileArg?.split('=')[1] ?? 'input.txt';
 
 const filePath = path.isAbsolute(inputPath)
