@@ -1,15 +1,12 @@
 import express from 'express';
 import { simulateRobots } from './simulator';
-import { Direction, Instruction, Position } from './types';
-import { logger } from './logger';
+import { Direction, Instruction, Position, RobotInput } from './model/types';
+import { logger } from './logger/logger';
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
-
-type RobotInput = {
-  start: Position;
-  instructions: Instruction[];
-};
+app.use(cors());
 
 /**
  * @swagger
