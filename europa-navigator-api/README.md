@@ -1,53 +1,90 @@
-# Europa Explorer
+# Europa Navigator API
 
-A TypeScript simulation of robots navigating a grid, inspired by the Mars Rover problem.
+A Node.js/TypeScript project to simulate robot navigation on a grid, supporting both file-based and API-based input.
 
-## Project Structure
+## 🚀 Installation
 
-- [`src/index.ts`](src/index.ts): Entry point. Reads input and runs the simulation.
-- [`src/robot.ts`](src/robot.ts): Contains the [`Robot`](src/robot.ts) class for robot movement logic.
-- [`src/types.ts`](src/types.ts): Type definitions for directions, instructions, and positions.
-- [`input.txt`](input.txt): Input file specifying the grid and robot instructions.
+1. **Clone the repository**
+   ```sh
+   git clone <repo-url>
+   cd europa-navigator-api
+   ```
 
-## Input Format
-
-The [`input.txt`](input.txt) file should be structured as follows:
-
-```
-<grid width> <grid height>
-<x> <y> <direction>
-<instructions>
-...
-```
-
-Example:
-```
-5 5
-1 2 N
-LMLMLMLMM
-3 3 E
-MMRMMRMRRM
-```
-
-## Running the Project
-
-1. Install dependencies:
+2. **Install dependencies**
    ```sh
    npm install
    ```
 
-2. Run the simulation:
+3. **Build the project (if needed)**
+   ```sh
+   npm run build
+   ```
+
+## 🏃 Running the Simulator
+
+### 1. File Input Mode
+
+You can run the simulator directly using a file input:
+
+- **Default input file:**  
+  ```sh
+  npm run file-input
+  ```
+  This will use `input.txt` in the project root.
+
+- **Custom input file:**  
+  ```sh
+  npm run file-input inputFile=abc.txt
+  ```
+  Replace `abc.txt` with your file name.
+
+### 2. API Mode
+
+1. **Start the server:**
    ```sh
    npm start
    ```
 
-## Output
+2. **API Documentation:**  
+   Visit [http://localhost:3000/api-docs](http://localhost:3000/api-docs) for Swagger UI.
 
-The program prints the final position and direction of each robot after executing its instructions.
+3. **Test the API:**  
+   - Use the Swagger UI or Postman to send requests to `/simulate`.
+   - Example request body:
+     ```json
+     {
+       "grid": [5, 5],
+       "robots": [
+         {
+           "start": { "x": 1, "y": 2, "orientation": "N" },
+           "instructions": ["L", "M", "L", "M", "L", "M", "L", "M", "M"]
+         }
+       ]
+     }
+     ```
 
-## Build
+## ⚠️ Edge Cases & Notes
 
-To compile TypeScript to JavaScript:
-```sh
-npm run build
-```
+- **Occupied Cells:**  
+  If a robot attempts to move into a cell already occupied by another robot, it will skip the move and remain in its current position.
+- **Out-of-Bounds:**  
+  Robots will not move outside the grid boundaries.
+- **Invalid Input:**  
+  The API and file input will validate the input format and return errors for invalid requests.
+
+## 🛠️ Requirements
+
+- Node.js (v16+ recommended)
+- npm
+
+## 📂 Project Structure
+
+- `src/` - Source code
+- `input.txt` - Default input file for file mode
+- `README.md` - This file
+
+## 🤝 Contributing
+
+Feel free to open issues or submit pull requests!
+
+---
