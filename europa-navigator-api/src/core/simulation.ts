@@ -4,7 +4,7 @@ import { Robot } from './robot';
 import { Direction } from './types';
 
 const VALID_DIRECTIONS = ['N', 'E', 'S', 'W'];
-const VALID_INSTRUCTIONS = new Set(['L', 'R', 'M']);
+const VALID_INSTRUCTIONS = new Set(['L', 'R', 'M', 'B']);
 
 export class Simulation {
   private readonly grid: Grid;
@@ -24,7 +24,7 @@ export class Simulation {
   /**
    * Adds a robot with input validation. If invalid, logs an error.
    */
-  addRobot(start: { x: number; y: number; dir: string }, instructions: string[]) {
+  addRobot(start: { x: number; y: number; dir: string }, fuel: number, instructions: string[]) {
     const { x, y, dir } = start;
 
     // Validate direction
@@ -52,7 +52,7 @@ export class Simulation {
     }
 
     const position = new Position(x, y, dir as Direction);
-    const robot = new Robot(position, instructions, this.grid);
+    const robot = new Robot(position, instructions, this.grid, fuel);
     this.robots.push(robot);
   }
 

@@ -40,6 +40,15 @@ export class Position {
     }
   }
 
+  getBack(): [number, number] {
+    switch (this.dir) {
+      case 'N': return [this.x, this.y - 1];
+      case 'E': return [this.x - 1, this.y];
+      case 'S': return [this.x, this.y + 1];
+      case 'W': return [this.x + 1, this.y];
+    }
+  }
+
   toString(): string {
     return `${this.x} ${this.y} ${this.dir}`;
   }

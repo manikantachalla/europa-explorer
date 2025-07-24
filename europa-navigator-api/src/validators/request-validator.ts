@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 const VALID_DIRECTIONS = ['N', 'E', 'S', 'W'];
-const VALID_INSTRUCTIONS = new Set(['L', 'R', 'M']);
+const VALID_INSTRUCTIONS = new Set(['L', 'R', 'M', 'B']);
 
 export function validateSimulateRequest(req: Request, res: Response, next: NextFunction) {
   const { grid, robots } = req.body;

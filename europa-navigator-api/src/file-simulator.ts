@@ -3,7 +3,7 @@ import path from 'path';
 import { Simulation } from './core/simulation';
 
 const VALID_DIRECTIONS = ['N', 'E', 'S', 'W'];
-const VALID_INSTRUCTIONS = new Set(['L', 'R', 'M']);
+const VALID_INSTRUCTIONS = new Set(['L', 'R', 'M', 'B']);
 
 // ── 1. Get file path from CLI args
 const args = process.argv.slice(2);
@@ -58,13 +58,14 @@ for (let i = 1; i < lines.length; i += 2) {
   const positionLine = lines[i];
   const instructionLine = lines[i + 1];
 
-  const [xStr, yStr, dir] = positionLine.split(' ');
+  const [xStr, yStr, dir, fStr] = positionLine.split(' ');
 
   const x = Number(xStr);
   const y = Number(yStr);
+  const fuel = Number(fStr);
 
   // Validate position line
-  if (isNaN(x) || isNaN(y) || !VALID_DIRECTIONS.includes(dir)) {
+  if (isNaN(x) || isNaN(y) || !VALID_DIRECTIONS.includes(dir) || isNaN(fuel)) {
     console.error(`❌ Invalid robot position at line ${i + 1}: "${positionLine}"`);
     continue;
   }
@@ -77,7 +78,7 @@ for (let i = 1; i < lines.length; i += 2) {
     continue;
   }
 
-  sim.addRobot({ x, y, dir }, instructions);
+  sim.addRobot({ x, y, dir }, fuel, instructions);
 }
 
 // ── 7. Run simulation
